@@ -20,8 +20,7 @@ export class Characters {
     }
 
     heal(target: Characters){
-        console.log("heal character");
-        target._health++;
+        target.health++;
         return target;
     }
 

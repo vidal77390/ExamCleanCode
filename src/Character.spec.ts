@@ -4,15 +4,25 @@ import 'mocha';
 import {Warrior} from "./Warrior";
 import {Characters} from "./Characters";
 
-let warrior: Warrior = new Warrior("Leo");
-let character: Characters = new Characters("Dmytro");
+let character: Characters;
 
-
+beforeEach(() => {
+    character  = new Characters("Dmytro");
+})
 
 describe('Character test',
     () => {
-        it('should initiale health Character to 100', () => {
+        it('should initialize name', () => {
+            expect(character.name).equal("Dmytro");
+        });
+
+        it('should initialize health Character to 100', () => {
             expect(character.health).equal(100);
+        });
+
+        it('health should\'nt exceed 100', () => {
+            let characterBis = character.heal(character);
+            expect(characterBis.health).to.be.lessThan(101);
         });
 
     });
