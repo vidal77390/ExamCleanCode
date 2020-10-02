@@ -1,8 +1,7 @@
 
 import {expect} from 'chai';
 import 'mocha';
-import {Warrior} from "./Warrior";
-import {Characters} from "./Characters";
+import {Characters} from "../classes/Characters";
 
 let character: Characters;
 
