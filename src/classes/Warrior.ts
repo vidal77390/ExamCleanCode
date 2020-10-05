@@ -7,4 +7,13 @@ export class Warrior extends Characters {
         else return super.heal(target);
     }
 
+    attack(target: Characters): Characters {
+        target.health = target.health - (getRandomInt(9));
+        return target;
+
+    }
+    
+}
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * Math.floor(max));
 }

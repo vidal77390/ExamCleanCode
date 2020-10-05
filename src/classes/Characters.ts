@@ -12,11 +12,14 @@ export class Characters {
 
     private _health: number;
     name: String;
+    factionName: String;
     private _lifeStatus: String;
 
     constructor(name: String) {
         this._health = 100;
         this.name = name;
+        this.factionName = '';
+
     }
 
     heal(target: Characters){
