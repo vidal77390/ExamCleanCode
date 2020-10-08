@@ -1,6 +1,7 @@
 //Pourquoi pas créer une relation entre entité et class
 // C'est à dire déclarer entité en classe abstraite et que charctère hérite de entity et que priest ou warrior herite de character
 // Plus on lis le sujet plus il ya d'arborecence qui se crée
+
 export class Entity {
 
     get health(): number {return this._health;}

@@ -8,9 +8,11 @@ export class Warrior extends Characters {
     }
 
     attack(target: Characters): Characters {
-        target.health = target.health - (getRandomInt(9));
-        return target;
-
+        if(this.isSameFaction(target) && this.name != target.name) return target;
+        else {
+            target.health = target.health - (getRandomInt(9));
+            return target;
+        }
     }
     
 }

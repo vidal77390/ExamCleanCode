@@ -1,3 +1,5 @@
+import {Faction} from "./Faction";
+
 export class Characters {
 
     get health(): number {return this._health;}
@@ -12,19 +14,33 @@ export class Characters {
 
     private _health: number;
     name: String;
-    factionName: String;
+    faction?: Faction;
     private _lifeStatus: String;
 
     constructor(name: String) {
         this._health = 100;
         this.name = name;
-        this.factionName = '';
-
     }
 
     heal(target: Characters){
         target.health++;
         return target;
     }
+
+    joinFaction(faction: Faction){
+        this.faction = faction;
+        return this;
+    }
+
+    leaveFaction(){
+        this.faction = undefined;
+        return this;
+    }
+
+    isSameFaction(character: Characters){
+        if(this.faction?.factionName === character.faction?.factionName && this.faction) return true;
+        else return false;
+    }
+
 
 }
