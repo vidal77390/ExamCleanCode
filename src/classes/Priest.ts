@@ -3,7 +3,7 @@ import {Characters} from "./Characters";
 export class Priest extends Characters {
 
     heal(target: Characters): Characters {
-        if(this.name !== target.name && this.isSameFaction(target)){
+        if(this.name !== target.name && this.isSameFactionOrAlly(target)){
             target.health = target.health + (getRandomInt(5) + 5) ;
             return target;
         }

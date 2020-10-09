@@ -6,7 +6,7 @@ import {Entity} from "../classes/Entity";
 let entity: Entity;
 
 beforeEach(() => {
-    entity  = new Entity("Mouton");
+    entity  = new Entity();
 })
 
 describe('Entity test',

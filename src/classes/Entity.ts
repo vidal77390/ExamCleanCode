@@ -17,8 +17,7 @@ export class Entity {
     private _health: number;
     private _lifeStatus: String;
 
-    constructor(_lifeStatus: String) {
-        this._lifeStatus = "alive";
+    constructor() {
         this._health = 100;
     }
 
