@@ -18,13 +18,13 @@ describe('Faction test',
     () => {
         it('Should join faction', () => {
             character.joinFaction(faction1);
-            expect(character.faction?.factionName).equal("Gang");
+            expect(character.faction.indexOf(faction1)).not.equal("Gang");
         });
 
         it('Should leave faction', () => {
             character.joinFaction(faction1);
-            character.leaveFaction();
-            expect(character.faction).to.not.exist;
+            character.leaveFaction(faction1);
+            expect(character.faction.length).equal(0);
         });
 
         it('May have a friend', () => {
