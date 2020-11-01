@@ -15,12 +15,13 @@ export class Characters extends Entity {
 
     //private _health: number;
     name: String;
-    faction?: Faction;
+    faction: Faction[];
     //private _lifeStatus: String;
 
     constructor(name: String) {
         super();
         this.name = name;
+        this.faction = [];
     }
 
     heal(target: Characters){
@@ -29,24 +30,29 @@ export class Characters extends Entity {
     }
 
     joinFaction(faction: Faction){
-        this.faction = faction;
+        this.faction.push(faction);
         return this;
     }
 
-    leaveFaction(){
-        this.faction = undefined;
+    leaveFaction(faction: Faction){
+        let indexOfFaction = this.faction.indexOf(faction);
+        this.faction.splice(indexOfFaction, 1);
         return this;
     }
 
     isSameFactionOrAlly(character: Characters){
-        if(this.faction?.factionName === character.faction?.factionName
-             && this.faction) return true;
-        else if(this.faction && character.faction){
-            let indexOfFriend = this.faction.friends.indexOf(character.faction);
-            if( indexOfFriend !== -1) return true;
-            else return false;
-        }
-        else return false;
+        let isSameFactionOrAlly = false;
+        this.faction.forEach(factionCharacterA => {
+            character.faction.forEach(factionCharacterB => {
+                if(factionCharacterA.factionName === factionCharacterB.factionName
+                    && factionCharacterA) isSameFactionOrAlly = true;
+                else if(factionCharacterA && factionCharacterB){
+                   let indexOfFriend = factionCharacterA.friends.indexOf(factionCharacterB);
+                   if( indexOfFriend !== -1) isSameFactionOrAlly = true;
+               }
+            });
+        });
+        return isSameFactionOrAlly;
     }
 
 
