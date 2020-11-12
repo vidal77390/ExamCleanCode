@@ -8,7 +8,7 @@ export class Warrior extends Characters {
     }
 
     attack(target: Characters): Characters {
-        if(this.isSameFactionOrAlly(target) && this.name != target.name) return target;
+        if(this.isCharacterAlly(target) && this.name != target.name) return target;
         else {
             target.health = target.health - (getRandomInt(9));
             return target;

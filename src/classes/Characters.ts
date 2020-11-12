@@ -1,22 +1,12 @@
 import { Entity } from './Entity';
 import {Faction} from "./Faction";
+import {Assembly} from "./Assembly";
 
 export class Characters extends Entity {
 
-    /*get health(): number {return this._health;}
-    set health(value: number) {
-        if(value > 100) this._health = 100;
-        else this._health = value;
-    }
-    get lifeStatus(): String {
-        if(this._health > 0) return "alive";
-        else return "dead";
-    }*/
-
-    //private _health: number;
     name: String;
     faction: Faction[];
-    //private _lifeStatus: String;
+    assembly?: Assembly;
 
     constructor(name: String) {
         super();
@@ -40,19 +30,34 @@ export class Characters extends Entity {
         return this;
     }
 
-    isSameFactionOrAlly(character: Characters){
+    // TODO transform in abstract function or create interface to join/leave assembly
+    joinAssembly(assembly: Assembly){
+        if(this.assembly) return;
+        else this.assembly = assembly;
+    }
+
+    leaveAssembly(){
+        this.assembly = undefined;
+    }
+
+    isCharacterAlly(character: Characters){
         let isSameFactionOrAlly = false;
         this.faction.forEach(factionCharacterA => {
             character.faction.forEach(factionCharacterB => {
-                if(factionCharacterA.factionName === factionCharacterB.factionName
-                    && factionCharacterA) isSameFactionOrAlly = true;
-                else if(factionCharacterA && factionCharacterB){
-                   let indexOfFriend = factionCharacterA.friends.indexOf(factionCharacterB);
-                   if( indexOfFriend !== -1) isSameFactionOrAlly = true;
-               }
+                if(this.isFactionAlly(factionCharacterA, factionCharacterB)) isSameFactionOrAlly = true;
             });
         });
         return isSameFactionOrAlly;
+    }
+
+    isFactionAlly(factionA: Faction, factionB: Faction){
+        if(factionA.factionName === factionB.factionName
+            && factionA) return true;
+        else if(factionA && factionB){
+            let indexOfFriend = factionA.friends.indexOf(factionB);
+            return indexOfFriend !== -1;
+        }else return false;
+
     }
 
 
