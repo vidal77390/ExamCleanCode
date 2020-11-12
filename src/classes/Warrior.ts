@@ -2,6 +2,11 @@ import {Characters} from "./Characters";
 
 export class Warrior extends Characters {
 
+    constructor(name: String) {
+        super(name);
+        this.role = "Warrior";
+    }
+
     heal(target: Characters): Characters {
         if(this.name !== target.name) return target;
         else return super.heal(target);

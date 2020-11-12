@@ -2,10 +2,12 @@ import { Entity } from './Entity';
 import {Faction} from "./Faction";
 import {Assembly} from "./Assembly";
 
+// Peut on forcer l'implementation d'une interface a tout ceux qui herite de Character ?
 export class Characters extends Entity {
 
     name: String;
     faction: Faction[];
+    role: String = "Character";
     assembly?: Assembly;
 
     constructor(name: String) {
@@ -30,10 +32,8 @@ export class Characters extends Entity {
         return this;
     }
 
-    // TODO transform in abstract function or create interface to join/leave assembly
     joinAssembly(assembly: Assembly){
-        if(this.assembly) return;
-        else this.assembly = assembly;
+        if(assembly.canJoinAssembly(this.role) && this.assembly === undefined) this.assembly = assembly;
     }
 
     leaveAssembly(){
@@ -62,3 +62,5 @@ export class Characters extends Entity {
 
 
 }
+
+

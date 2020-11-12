@@ -1,6 +1,13 @@
 import {Characters} from "./Characters";
+import {AssemblyMember} from "../Interface";
+import {Assembly} from "./Assembly";
 
-export class Priest extends Characters {
+export class Priest extends Characters{
+
+    constructor(name: String) {
+        super(name);
+        this.role = "Priest";
+    }
 
     heal(target: Characters): Characters {
         if(this.name !== target.name && this.isCharacterAlly(target)){
