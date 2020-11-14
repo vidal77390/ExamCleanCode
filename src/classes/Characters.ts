@@ -33,10 +33,11 @@ export class Characters extends Entity {
     }
 
     joinAssembly(assembly: Assembly){
-        if(assembly.canJoinAssembly(this.role) && this.assembly === undefined) this.assembly = assembly;
+        assembly.joinAssembly(this);
     }
 
     leaveAssembly(){
+        this.assembly?.characterLeaveAssembly(this);
         this.assembly = undefined;
     }
 

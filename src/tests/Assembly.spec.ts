@@ -18,7 +18,7 @@ beforeEach(() => {
 
 })
 
-describe('Entity test',
+describe('Assembly test',
     () => {
         it('Should join assembly', () => {
             warrior1.joinAssembly(assembly1);
@@ -40,4 +40,39 @@ describe('Entity test',
             priest1.joinAssembly(assembly2)
             expect(priest1.assembly?.name).equal("Goulag");
         });
+
+        it('Should be master', () => {
+            warrior1.joinAssembly(assembly1);
+            expect(assembly1.master?.name).equal(warrior1.name);
+        });
+
+        it('Should not be master', () => {
+            warrior1.joinAssembly(assembly2);
+            priest1.joinAssembly(assembly2);
+            expect(assembly2.master?.name).not.be.equal(priest1.name);
+            expect(assembly2.members.indexOf(priest1)).not.be.equal(-1);
+        });
+
+        it('Should update Assembly name', () => {
+            let newName : String = "Glory";
+            warrior1.joinAssembly(assembly1);
+            assembly1.updateAssemblyName(warrior1, newName);
+            expect(assembly1.name).equal(newName);
+        });
+
+        it('Should not update Assembly name', () => {
+            let newName : String = "Glory";
+            warrior1.joinAssembly(assembly1);
+            priest1.joinAssembly(assembly1);
+            assembly1.updateAssemblyName(priest1, newName);
+            expect(assembly1.name).not.be.equal(newName);
+        });
+
+        it('Should update Assembly master', () => {
+            warrior1.joinAssembly(assembly2);
+            priest1.joinAssembly(assembly2);
+            warrior1.leaveAssembly();
+            expect(assembly2.master?.name).equal(priest1.name);
+        });
+
     });
