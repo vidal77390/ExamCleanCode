@@ -1,10 +1,12 @@
 import {Characters} from "./Characters";
+import {Utils} from "./Utils";
 
 
 export class Assembly {
 
-    name: String;
+    private utils = new Utils();
     private allowedRoles: String[];
+    name: String;
     master?: Characters;
     members: Characters[];
     
@@ -12,7 +14,6 @@ export class Assembly {
     constructor(name: String, allowedRoles: String[]){
         this.name = name;
         this.members = [];
-        //TODO Can we stock Type in this propertie ?
         this.allowedRoles = allowedRoles;
     }
 
@@ -43,12 +44,9 @@ export class Assembly {
     }
 
     updateAssemblyMaster(){
-        let randomIndex = getRandomInt(this.members.length);
+        let randomIndex = this.utils.getRandomInt(this.members.length);
         this.master = this.members[randomIndex];
     }
 
 }
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
